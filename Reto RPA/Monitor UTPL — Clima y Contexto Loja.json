@@ -1,0 +1,348 @@
+{
+  "name": "Monitor UTPL — Clima y Contexto Loja",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "https://api.open-meteo.com/v1/forecast?latitude=-3.99&longitude=-79.20&current_weather=true",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        0
+      ],
+      "id": "0c58aafb-5ffc-4f47-8689-3d9d60004382",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "769ffb50-6b45-4eda-b75c-8a3d77446d79",
+              "name": "temperatura",
+              "value": "={{ $json.current_weather.temperature }}",
+              "type": "string"
+            },
+            {
+              "id": "6e97d784-bca0-4815-9404-2a3db5dd0970",
+              "name": "viento",
+              "value": "={{ $json.current_weather.windspeed }}",
+              "type": "string"
+            },
+            {
+              "id": "8ab321b7-b8a4-437e-b55a-d6e60a3ccd6f",
+              "name": "hora",
+              "value": "={{ $json.current_weather.time }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        400,
+        -16
+      ],
+      "id": "4693984c-d6ac-4bbd-a8ee-62ea7ff4d1f8",
+      "name": "Formatear Clima"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f113482d-71b0-4d07-8aa7-b4082cf5e10c",
+              "leftValue": "={{ $json.temperatura }}",
+              "rightValue": "=10",
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            },
+            {
+              "id": "258efb25-e154-4068-985a-2e673f747aeb",
+              "leftValue": "={{ $json.temperatura }}",
+              "rightValue": 28,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        608,
+        -16
+      ],
+      "id": "b1669972-cfb3-47f5-ab10-548b6dc14870",
+      "name": "Evaluar Temperatura"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8c481f38-6f25-4f65-9982-798214ff0b9d",
+              "name": "estado",
+              "value": "ALERTA: temperatura fuera de rango normal",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        832,
+        -192
+      ],
+      "id": "f72a558d-8efa-4bb9-96c6-94972aced6de",
+      "name": "SET-ALERTA"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "78bac0e4-cea8-447b-9afc-10371db770a7",
+              "name": "estado",
+              "value": "NORMAL: temperatura dentro del rango esperado",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        832,
+        -32
+      ],
+      "id": "4760fc20-d30a-4429-8101-c69d82a0c4f3",
+      "name": "SET-NORMAL"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1120,
+        0
+      ],
+      "id": "db8fe05d-d525-457e-bc61-ac71191ecc3c",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "url": "https://restcountries.com/v3.1/name/ecuador",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.4,
+      "position": [
+        208,
+        176
+      ],
+      "id": "6c1f92da-e17b-4819-a8f7-82b4870e14ca",
+      "name": "HTTP Request1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4c306e52-f7ed-4e67-8453-54831c1225f5",
+              "name": "temperatura",
+              "value": "={{ $('Formatear Clima').first().json.temperatura }}",
+              "type": "string"
+            },
+            {
+              "id": "4802c453-5583-4e5a-914e-3b3786ddfccc",
+              "name": "viento",
+              "value": "={{ $('Formatear Clima').first().json.viento }}",
+              "type": "string"
+            },
+            {
+              "id": "973fb619-5a81-451b-880f-066f0f9db68a",
+              "name": "estado",
+              "value": "={{ $('SET-NORMAL').first().json.estado }}",
+              "type": "string"
+            },
+            {
+              "id": "a856882e-2d15-4ac4-a763-bc787fe00256",
+              "name": "pais",
+              "value": "={{ $json.name.common }}",
+              "type": "string"
+            },
+            {
+              "id": "b8910650-d7c8-4a33-b9b9-345937c1e949",
+              "name": "poblacion",
+              "value": "={{ $json.population }}",
+              "type": "string"
+            },
+            {
+              "id": "915d3dc7-713d-4ecf-80b2-d24ba9af1b4a",
+              "name": "timestamp",
+              "value": "={{ $now }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1072,
+        176
+      ],
+      "id": "901ea82e-cf5c-4028-af5c-db32db7f3ddd",
+      "name": "Set-Reporte Final"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1c7eee3b-f353-4a53-82e3-dfd4821e7a4a",
+      "name": "Schedule Trigger"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Formatear Clima",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Clima": {
+      "main": [
+        [
+          {
+            "node": "Evaluar Temperatura",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evaluar Temperatura": {
+      "main": [
+        [
+          {
+            "node": "SET-ALERTA",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "SET-NORMAL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SET-ALERTA": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SET-NORMAL": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request1": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Set-Reporte Final",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "1ade359e-af15-4e73-a5db-81728d212d24",
+  "meta": {
+    "instanceId": "cc4a297569deab4210d8105b97fd474913b87637ca6a911a6d6fdff98db4fe1d"
+  },
+  "id": "wuHWDwSpbrG6AinB",
+  "tags": []
+}
