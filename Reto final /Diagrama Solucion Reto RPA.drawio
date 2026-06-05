@@ -1,0 +1,73 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Reto RPA" id="qkoMo5r1DcjuhxBDulrm">
+    <mxGraphModel dx="1099" dy="431" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;" value="Fuentes de Datos&#xa;BCE&#xa;INEC&#xa;Supercias&#xa;MINEDUC" vertex="1">
+          <mxGeometry height="100" width="220" x="260" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" value="Schedule Trigger&#xa;Diario y Semanal" vertex="1">
+          <mxGeometry height="60" width="220" x="260" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" value="N8N&#xa;BCE, INEC, Ranking, MINEDUC" vertex="1">
+          <mxGeometry height="80" width="220" x="80" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-4" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" value="UiPath&#xa;Supercias Directorio" vertex="1">
+          <mxGeometry height="80" width="220" x="440" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" value="Descarga de Archivos" vertex="1">
+          <mxGeometry height="60" width="220" x="260" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-6" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;" value="Verificación&#xa;¿Archivo válido?" vertex="1">
+          <mxGeometry height="100" width="180" x="280" y="540" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;" value="Guardar con Fecha" vertex="1">
+          <mxGeometry height="60" width="180" x="80" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;" value="Registrar Error&#xa;Reintento x3" vertex="1">
+          <mxGeometry height="60" width="180" x="480" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-9" parent="1" style="shape=folder;whiteSpace=wrap;html=1;fillColor=#e1d5e7;" value="datos_macroentorno/&#xa;bce&#xa;inec&#xa;supercias&#xa;mineduc" vertex="1">
+          <mxGeometry height="110" width="220" x="260" y="820" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;" value="Notificación al Equipo de Datos" vertex="1">
+          <mxGeometry height="60" width="220" x="260" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-11" edge="1" parent="1" source="HCG0QjeEKwEZwfHgF-It-1" target="HCG0QjeEKwEZwfHgF-It-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-12" edge="1" parent="1" source="HCG0QjeEKwEZwfHgF-It-2" target="HCG0QjeEKwEZwfHgF-It-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-13" edge="1" parent="1" source="HCG0QjeEKwEZwfHgF-It-2" target="HCG0QjeEKwEZwfHgF-It-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-14" edge="1" parent="1" source="HCG0QjeEKwEZwfHgF-It-3" target="HCG0QjeEKwEZwfHgF-It-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-15" edge="1" parent="1" source="HCG0QjeEKwEZwfHgF-It-4" target="HCG0QjeEKwEZwfHgF-It-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-16" edge="1" parent="1" source="HCG0QjeEKwEZwfHgF-It-5" target="HCG0QjeEKwEZwfHgF-It-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-17" edge="1" parent="1" source="HCG0QjeEKwEZwfHgF-It-6" target="HCG0QjeEKwEZwfHgF-It-7" value="Sí">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-18" edge="1" parent="1" source="HCG0QjeEKwEZwfHgF-It-6" target="HCG0QjeEKwEZwfHgF-It-8" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-19" edge="1" parent="1" source="HCG0QjeEKwEZwfHgF-It-7" target="HCG0QjeEKwEZwfHgF-It-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-20" edge="1" parent="1" source="HCG0QjeEKwEZwfHgF-It-8" target="HCG0QjeEKwEZwfHgF-It-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="HCG0QjeEKwEZwfHgF-It-21" edge="1" parent="1" source="HCG0QjeEKwEZwfHgF-It-9" target="HCG0QjeEKwEZwfHgF-It-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
